@@ -5,14 +5,9 @@ if ~exist('data', 'var')
     load(fullfile(dataDir, 'epochedData.mat'))
 end
 
-monkeyName = strip(extract(...
-    extract(dataDir, "Sessions\" + lettersPattern + "\"), ...
-    "\" + lettersPattern + "\"), "\");
-monkeyName = monkeyName{1};
-sessionDate = strip(extract(dataDir, "\" + digitsPattern + "\"), "\");
-sessionDate = sessionDate{1};
-nSession = strip(extract(dataDir, "\S" + digitsPattern + "\"), "\");
-nSession = nSession{1};
+monkeyName  = string(regexp(dataDir, '\\Sessions\\([\w^\d]+)\\', 'tokens'));
+sessionDate = string(regexp(dataDir, '\\(\d+)\\', 'tokens'));
+nSession    = string(regexp(dataDir, '\\S(\d+)\\?', 'tokens'));
 
 %
 fs = 1000;
@@ -33,8 +28,8 @@ infoDir = ls(fullfile(dataDir, '..', '2021*'));
 cmFile  = ls(fullfile(dataDir, '..', infoDir, '*-res.txt'));
 cm = readmatrix(fullfile(dataDir, '..', infoDir, cmFile), ...
     'OutputType', 'string');
-cm = extract(cm(:, 3), ("A"|("B"+("I"|"H"|"L")))+"_"+digitsPattern);
-cmNum = str2double(extract(cm, digitsPattern));
+cmNum = str2double(string(regexp(cm(:, 3), '\w+_(\d+).tif', 'tokens')));
+cm    = string(regexp(cm(:, 3), '(\w+)_\d+.tif', 'tokens'));
 
 stm.isSerieA        = strncmp(cm, 'A', 1);
 stm.isSerieB        = strncmp(cm, 'B', 1);
