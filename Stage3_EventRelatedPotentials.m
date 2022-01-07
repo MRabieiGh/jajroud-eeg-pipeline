@@ -1,8 +1,8 @@
 if ~exist('dataDir', 'var')
     dataDir = uigetdir([], 'Path to Mat Data Folder');
-    if ~exist('data', 'var')
-        load(fullfile(dataDir, 'epochedData.mat'))
-    end
+end
+if ~exist('data', 'var')
+    load(fullfile(dataDir, 'epochedData.mat'))
 end
 
 monkeyName = strip(extract(...
