@@ -7,7 +7,7 @@ This pipeline assumes that recorded data are stored in the following format besi
 | *                               | .nev        | */rootDir/                            | serial io events                            |
 | \<sessionDate\>-\<sessionTime\>-res | .txt        | */rootDir/"sessionDate"-"sessionTime" | sequence of presented stimuli               |
 
-`rootDir` is a folder matching the following template: "*\\<monkey name\>\\<session date\>\S\<session index\> (e.g. .\Fandoq\20211129\S01)
+`rootDir` is a folder matching the following template: "*\Sessions\\<monkey name\>\\<session date\>\S\<session index\> (e.g. .\Fandoq\20211129\S01)
 
 * Stage 1: Parsing Binary Data </br>
 In this stage, using Blackrock's MATLAB toolkit (`NPMK`), event file (`.nev`) and timeseries (`.nsx`) are loaded into workspace.  </br>
